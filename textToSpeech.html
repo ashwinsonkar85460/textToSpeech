@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Text-to-Speech</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+      background: linear-gradient(to right, #ff7eb3, #ff758c);
+      color: white;
+      text-align: center;
+    }
+    h1 {
+      margin-bottom: 20px;
+      color: #fff5f8;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
+    }
+    textarea {
+      width: 90%;
+      height: 150px;
+      padding: 10px;
+      font-size: 16px;
+      margin-bottom: 20px;
+      border: 2px solid #ffccd5;
+      border-radius: 10px;
+      background-color: #ffe5ec;
+      color: #ff3366;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+    button {
+      padding: 12px 25px;
+      font-size: 18px;
+      font-weight: bold;
+      background-color: #ff3366;
+      color: white;
+      border: none;
+      border-radius: 50px;
+      cursor: pointer;
+      box-shadow: 0 4px 15px rgba(255, 51, 102, 0.5);
+      transition: all 0.3s ease;
+    }
+    button:hover {
+      background-color: #ff0055;
+      box-shadow: 0 6px 20px rgba(255, 0, 85, 0.6);
+      transform: scale(1.05);
+    }
+    button:active {
+      transform: scale(1);
+    }
+  </style>
+</head>
+<body>
+  <h1>✨ Text-to-Speech Converter ✨</h1>
+  <textarea id="text" placeholder="Type your text here..."></textarea>
+  <br>
+  <button id="speakButton">🔊 Speak</button>
+
+  <script>
+    document.getElementById('speakButton').addEventListener('click', () => {
+      const text = document.getElementById('text').value.trim();
+
+      if (!text) {
+        alert('Please enter some text to convert to speech!');
+        return;
+      }
+
+      if ('speechSynthesis' in window) {
+        const speech = new SpeechSynthesisUtterance(text);
+        speech.lang = 'en-US'; // Set language
+        speech.pitch = 1; // Set pitch
+        speech.rate = 1; // Set speed
+        window.speechSynthesis.speak(speech);
+      } else {
+        alert('Sorry, your browser does not support text-to-speech.');
+      }
+    });
+  </script>
+</body>
+</html>
